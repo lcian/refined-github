@@ -1,0 +1,25 @@
+.rgh-hide-prs {
+	& .Box-row--drag-hide {
+		transition: 100ms opacity;
+	}
+
+	&:not(:hover) .Box-row--drag-hide {
+		opacity: 50%;
+	}
+
+	&:not(:hover) {
+		.min-width-0 > :is(.d-block, .d-flex) /* PR metadata */ {
+			display: none !important;
+		}
+	}
+}
+
+/* Hide the toggle button until the row is hovered */
+.rgh-hide-prs-button {
+	transition: opacity 100ms;
+	opacity: 0;
+
+	:is(.Box-row, li[role="listitem"]):hover & {
+		opacity: 1;
+	}
+}

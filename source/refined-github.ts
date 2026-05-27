@@ -76,6 +76,7 @@ import './features/show-names.js';
 import './features/previous-next-commit-buttons.js';
 import './features/extend-diff-expander.js';
 import './features/show-user-top-repositories.js';
+import './features/hide-prs.js';
 import './features/hide-user-forks.js';
 import './features/user-profile-follower-badge.js';
 import './features/highlight-non-default-base-branch.js';
