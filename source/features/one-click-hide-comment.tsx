@@ -25,8 +25,8 @@ function addHideAsSpamButton(pencilButton: HTMLButtonElement): void {
 			type="button"
 			role="menuitem"
 			className="timeline-comment-action btn-link rgh-one-click-hide-comment"
-			aria-label="Hide comment as spam"
-			title="Hide as spam"
+			aria-label="Minimize comment"
+			title="Minimize"
 		>
 			<EyeClosedIcon />
 		</button>,
@@ -36,6 +36,11 @@ function addHideAsSpamButton(pencilButton: HTMLButtonElement): void {
 function hideAsSpam(event: DelegateEvent<MouseEvent, HTMLButtonElement>): void {
 	const comment = closestElement('.unminimized-comment', event.delegateTarget);
 	const hideForm = $(formSelector, comment);
+
+	// Optimistic UI: hide the entire comment box immediately while the API call is in flight.
+	// GitHub replaces the whole `.js-minimizable-comment-group` element by ID via Turbo Stream,
+	// so hiding it now is safe — the server response restores it as the minimized state.
+	closestElement('.js-minimizable-comment-group', event.delegateTarget).hidden = true;
 
 	// Submit the form with classifier=spam by appending a temporary submit button.
 	// `formNoValidate` bypasses the browser's HTML5 validation (the `classifier` select
